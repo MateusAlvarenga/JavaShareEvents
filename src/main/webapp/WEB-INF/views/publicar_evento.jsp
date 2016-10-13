@@ -109,7 +109,7 @@
                         <label> <i class="flaticon-position link icon"></i>Local</label>
                         <input id="geocomplete" type="text" placeholder="Local" value="" />                    
                     </div>
-                    <span >
+                    <span hidden>
                     <label>Locality</label>
                     <input name="locality" type="text" value="">
 
@@ -126,9 +126,11 @@
                     <input name="administrative_area_level_1" type="text" value="">
                     </span>
                 </div>
-                <button type="submit" class="large ui primary button">
+                <div class="field">
+                <button style="height: 50px;width: 135px;" type="submit" class="primary big ui  button">
                   Enviar
               </button>
+                </div>
             </form>
             <div class="map_canvas"></div>
         </div> 

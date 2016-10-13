@@ -28,12 +28,15 @@
 
 <body>
 
-<div class="container">
-
+<div class="container ">
+    
     <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
+       
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
+        <div class="form-group ${error != null ? 'has-error' : ''} form-out">
+            
+            <div class="form-in">
+              <h2 class="form-heading">Log in</h2>
             <span>${message}</span>
             <input name="username" type="text" class="form-control" placeholder="Nome de usuario"
                    autofocus="true"/>
@@ -44,10 +47,10 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             <h4 class="text-center"><a href="${contextPath}/registration">Criar uma nova conta</a></h4>
              <h5 class="text-center"><a href="${contextPath}/">Home</a></h5>
+           </div>
         </div>
-
     </form>
-
+  
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

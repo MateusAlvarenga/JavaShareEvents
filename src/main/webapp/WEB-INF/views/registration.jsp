@@ -28,16 +28,18 @@
 
 <body>
 
-<div class="container">
-
+<div class="container ">
+    
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Criar Conta</h2>
+      
         <spring:bind path="username">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
+            <div class="form-group ${status.error ? 'has-error' : ''} form-out">
+                <div class="form-in"> 
+                      <h2 class="form-signin-heading">Criar Conta</h2>
                 <form:input type="text" path="username" class="form-control" placeholder="Nome de usuario"
                             autofocus="true"></form:input>
                 <form:errors path="username"></form:errors>
-            </div>
+            
         </spring:bind>
 
         <spring:bind path="password">
@@ -61,8 +63,11 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Pronto</button>
         <h4 class="text-center"><a href="${contextPath}/login">Possuo uma conta</a></h4>
              <h5 class="text-center"><a href="${contextPath}/">Home</a></h5>
+             
+            </div>
+            </div>
     </form:form>
-
+    
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
