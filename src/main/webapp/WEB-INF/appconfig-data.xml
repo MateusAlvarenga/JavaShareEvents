@@ -33,7 +33,7 @@
             </props>
         </property>
     </bean>
-
+    
     <!-- Configure the transaction manager bean -->
     <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager">

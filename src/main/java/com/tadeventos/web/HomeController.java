@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- *
- * @author mat
- */
+ 
 @Controller 
 public class HomeController {
 
@@ -17,9 +14,6 @@ public class HomeController {
         return "home";
     }
     
-   @RequestMapping(value = {"/PublicarEvento"}, method = RequestMethod.GET)
-    public String PublicarEvento(Model model) {
-        return "publicar_evento";
-    }
+ 
     
 }

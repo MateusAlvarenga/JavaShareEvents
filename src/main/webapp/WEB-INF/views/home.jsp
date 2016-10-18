@@ -162,7 +162,7 @@
                     </div>
 
 
-                    <div class="ui hidden transition information">
+                    <div class="ui transition  ">
 
                         <p class="ui centered lead">Encontre os melhores eventos! 
                         </p>
