@@ -12,11 +12,10 @@
 
         <!-- Site Properities -->
         <title>TAD Eventos</title>
-
-        <link href="${contextPath}/resources/css/common.css" rel="stylesheet"> 
-        <link href="${contextPath}/resources/css/semantic.min.css" rel="stylesheet">
-        <link href="${contextPath}/resources/css/homepage.css" rel="stylesheet">
-        <link href="${contextPath}/resources/iconfonts/flaticon.css" type="text/css" rel="stylesheet">
+      <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+        <link href="${contextPath}/resources/css/semantic.min.css" rel="stylesheet" />
+        <link href="${contextPath}/resources/css/homepage.css" rel="stylesheet" />
+        <link href="${contextPath}/resources/iconfonts/flaticon.css" type="text/css" rel="stylesheet" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
 
         <script src="${contextPath}/resources/js/semantic.min.js"></script>
@@ -24,6 +23,8 @@
 
         <script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyC9V7jv_0HCSU81VYsUwDBBFfnFkyTBsEs"></script>
         <script src="${contextPath}/resources/js/jquery.geocomplete.min.js"></script>
+
+
     </head>
     <body id="home">
         <div class="ui inverted masthead centered segment">
@@ -37,12 +38,19 @@
                             TAD Eventos
                         </a>
                         <a href="${contextPath}/" class=" item">
-                            <i  class="flaticon-home"></i>Home 
+                            <i  class="flaticon-home"></i>Home
                         </a>
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                <a href="#" class="active ui item"><i class="write icon"></i>Publicar Novo Evento </a>
-                                <a class="ui item">${pageContext.request.userPrincipal.name}  </a>
-                         </c:if>
+                            <div class="ui dropdown item">
+                                ${pageContext.request.userPrincipal.name} <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <a href="${contextPath}/PublicarEvento" class="ui item"><i class="write icon"></i>Publicar Novo Evento </a>
+                                    <a href="${contextPath}/Eventos?coluna=anfitriao&valor=${pageContext.request.userPrincipal.name}" class="ui item">
+                                        <i class="write icon"></i>Minhas Publicações
+                                    </a>
+                                </div>
+                            </div>
+                        </c:if>
 
                         <div class="right menu">
 
@@ -63,3 +71,77 @@
                 </div>
             </div>
         </div>
+
+        <form hidden="" >
+            <fieldset>
+                <h3>Address-Details</h3>
+
+                <label>Name</label>
+                <input name="name" type="text" value="">
+
+                <label>POI Name</label>
+                <input name="point_of_interest" type="text" value="">
+
+                <label>Latitude</label>
+                <input name="lat" type="text" value="">
+
+                <label>Longitude</label>
+                <input name="lng" type="text" value="">
+
+                <label>Location</label>
+                <input name="location" type="text" value="">
+
+                <label>Location Type</label>
+                <input name="location_type" type="text" value="">
+
+                <label>Formatted Address</label>
+                <input name="formatted_address" type="text" value="">
+
+                <label>Bounds</label>
+                <input name="bounds" type="text" value="">
+
+                <label>Viewport</label>
+                <input name="viewport" type="text" value="">
+
+                <label>Route</label>
+                <input name="route" type="text" value="">
+
+                <label>Street Number</label>
+                <input name="street_number" type="text" value="">
+
+                <label>Postal Code</label>
+                <input name="postal_code" type="text" value="">
+
+                <label>Locality</label>
+                <input name="locality" type="text" value="">
+
+                <label>Sub Locality</label>
+                <input name="sublocality" type="text" value="">
+
+                <label>Country</label>
+                <input name="country" type="text" value="">
+
+                <label>Country Code</label>
+                <input name="country_short" type="text" value="">
+
+                <label>State</label>
+                <input name="administrative_area_level_1" type="text" value="">
+
+                <label>Place ID</label>
+                <input name="place_id" type="text" value="">
+
+                <label>ID</label>
+                <input name="id" type="text" value="">
+
+                <label>Reference</label>
+                <input name="reference" type="text" value="">
+
+                <label>URL</label>
+                <input name="url" type="text" value="">
+
+                <label>Website</label>
+                <input name="website" type="text" value="">
+            </fieldset>
+        </form>
+
+    

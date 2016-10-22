@@ -8,11 +8,11 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true"> 
-          <intercept-url pattern="/GravarEvento" access="hasRole('ROLE_USER')"/>
-       <intercept-url pattern="/PublicarEvento" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/welcome" access="hasRole('ROLE_USER')"/>
-        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
-        <logout logout-success-url="/login?logout" />
+       <intercept-url pattern="/Eventos" access="hasRole('ROLE_USER')"/>
+       <intercept-url pattern="/GravarEvento" access="hasRole('ROLE_USER')"/>
+       <intercept-url pattern="/PublicarEvento" access="hasRole('ROLE_USER')"/>      
+       <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+       <logout logout-success-url="/login?logout" />
     </http>
 
     <authentication-manager alias="authenticationManager">
