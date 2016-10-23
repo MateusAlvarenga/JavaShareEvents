@@ -8,6 +8,7 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true"> 
+        <intercept-url pattern="/Compra" access="hasRole('ROLE_USER')"/>
        <intercept-url pattern="/Eventos" access="hasRole('ROLE_USER')"/>
        <intercept-url pattern="/GravarEvento" access="hasRole('ROLE_USER')"/>
        <intercept-url pattern="/PublicarEvento" access="hasRole('ROLE_USER')"/>      

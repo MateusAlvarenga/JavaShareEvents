@@ -16,8 +16,9 @@
         <link href="${contextPath}/resources/css/semantic.min.css" rel="stylesheet" />
         <link href="${contextPath}/resources/css/homepage.css" rel="stylesheet" />
         <link href="${contextPath}/resources/iconfonts/flaticon.css" type="text/css" rel="stylesheet" />
+        <link  href="${contextPath}resources/css/credit.css" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-
+        
         <script src="${contextPath}/resources/js/semantic.min.js"></script>
         <script src="${contextPath}/resources/js/homepage.js"></script>
 

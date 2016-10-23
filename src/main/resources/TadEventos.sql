@@ -39,6 +39,38 @@ LOCK TABLES `Categoria` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Compra`
+--
+
+DROP TABLE IF EXISTS `Compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Compra` (
+  `idCompra` int(11) NOT NULL AUTO_INCREMENT,
+  `evento_idevento` int(11) NOT NULL DEFAULT '0',
+  `numero_cartao` varchar(45) DEFAULT NULL,
+  `bandeira` varchar(45) DEFAULT NULL,
+  `data_vencimento` varchar(45) DEFAULT NULL,
+  `digito_validador` varchar(45) DEFAULT NULL,
+  `user` varchar(45) DEFAULT NULL,
+  `valorTotal` double DEFAULT NULL,
+  PRIMARY KEY (`idCompra`),
+  KEY `fk_Compra_evento1_idx` (`evento_idevento`),
+  CONSTRAINT `fk_Compra_evento1` FOREIGN KEY (`evento_idevento`) REFERENCES `evento` (`idevento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Compra`
+--
+
+LOCK TABLES `Compra` WRITE;
+/*!40000 ALTER TABLE `Compra` DISABLE KEYS */;
+INSERT INTO `Compra` VALUES (1,17,'1111 1111 1111 1111','Visa','11/1111','111','12106672667',12.9),(2,16,'5555 5555 5555 5555','Visa','55/5555','555','12106672667',12.9),(3,19,'1111 1111 1111 1111','Visa','11/1111','111','12106672667',8),(4,17,'1111 1111 1111 1111','Visa','11/1111','111','12106672667',12.9),(5,17,'1111 1111 1111 1111','Visa','11/1111','111','12106672667',12.9);
+/*!40000 ALTER TABLE `Compra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `evento`
 --
 
@@ -49,17 +81,17 @@ CREATE TABLE `evento` (
   `idevento` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
   `cidade` varchar(45) DEFAULT NULL,
-  `estado` varchar(5) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL,
   `Pais` varchar(45) DEFAULT NULL,
   `Descricao` mediumtext,
-  `anfitriao` int(11) DEFAULT NULL,
-  `datafim` timestamp NULL DEFAULT '0000-00-00 00:00:00',
-  `datainicio` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `datafim` timestamp NULL DEFAULT NULL,
+  `datainicio` timestamp NULL DEFAULT NULL,
   `endereco` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`idevento`),
-  KEY `fk_evento_user1_idx` (`anfitriao`),
-  CONSTRAINT `fk_evento_user1` FOREIGN KEY (`anfitriao`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `count_entradas` bigint(20) DEFAULT NULL,
+  `preco_entrada` double DEFAULT NULL,
+  `anfitriao` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idevento`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +100,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
+INSERT INTO `evento` VALUES (16,'eventoX','Uberaba','Minas Gerais','Brasil','eventoX','2016-12-21 02:00:00','2016-10-21 02:00:00','Uberaba - MG, Brasil',5,12.9,'josue123'),(17,'teste','Uberaba','Minas Gerais','Brasil','teste','2016-10-29 07:00:00','2016-10-12 04:00:00','Uberaba - MG, Brasil',20,12.9,'josue123'),(18,'eeeee','Uberlândia','Minas Gerais','Brasil','eeeeee','2016-10-25 15:35:00','2016-10-06 03:00:00','Uberlândia - MG, Brasil',611,19.12,'12106672667'),(19,'asdfasd','Uberaba','Minas Gerais','Brasil','asdfa','2016-10-22 02:00:00','2016-10-22 02:00:00','Uberaba - MG, Brasil',3,4,'12106672667'),(20,'Corrida Naruto','São Paulo','São Paulo','Brasil','Corrida Naruto: \r\n\r\nNão vale usar kunai','2016-10-26 16:00:00','2016-10-19 16:00:00','São Paulo - SP, Brasil',108,20,'12106672667'),(21,'gg','Uberaba','Minas Gerais','Brasil','gg','2016-10-29 00:04:30','2016-10-25 02:00:00','Uberaba - MG, Brasil',100,30,'12106672667');
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,10 +164,10 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`,`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +176,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (5,'12106672667','$2a$11$5Hrfr4q832tTLohTFMIsLOSRX0OqRVmyqja4DcH8rH/b.MCRiEToq'),(6,'12106672668','$2a$11$6j4phKHIf3zOVgrmHV81ZuwCukrzsg4UUlwjKFCAe28XpEw78Zk9u'),(7,'12106672666','$2a$11$Sn1Pj/0x9eH8n217ox70IOVTz6voc.qamCB96skAFs.5IYxeKPe.u');
+INSERT INTO `user` VALUES (11,'josue123','$2a$11$nK6ZJsSu/nlvR.z.683iqeSveaMCaCoRcnJ7DbpjcBnOS3Yi74XAu'),(12,'12106672667','$2a$11$VHvHZDbP3deeG9lJJLgNIOKYh.8c2g4z9bEl09UPUsIcNTDktuRuy');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +229,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (5,1),(6,1),(7,1);
+INSERT INTO `user_role` VALUES (11,1),(12,1);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -209,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-13 16:09:31
+-- Dump completed on 2016-10-23 19:04:56

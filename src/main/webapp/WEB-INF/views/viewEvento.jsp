@@ -22,7 +22,7 @@
       <div class="ui two top attached buttons">
         <div class="ui grid">
 
-         <div class="four wide column">  <div class="massive ui button primary">Comprar Ingresso</div></div>
+            <div class="four wide column"> <a href="${contextPath}/Compra?idevento=${ObjEvento.idevento}"> <div class="massive ui button primary">Comprar Ingresso</div></a></div>
        </div>
      <div class="ui divider"></div>
      <div class="ui images">

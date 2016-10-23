@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,26 +145,28 @@ public class EventoDAOImp  implements EventoDAO {
 
     @Override
     public List Busca(String str) {
+        
       Evento evento;
       List<Evento> eventos = new ArrayList<>();
       String selecao = "SELECT * FROM evento " + str + ";";
-        System.out.println("Select::>"+selecao);
+       
       try (Statement stmt = (Statement) conexao.createStatement()) {
           try (ResultSet rs = stmt.executeQuery(selecao)) {
-              while (rs.next()) {
+             
+              while (rs.next()) {                  
             	  evento = new Evento();
-                  evento.setIdevento(rs.getLong(1));
-                  evento.setTitulo(rs.getString(2));
-                  evento.setCidade(rs.getString(3));
-                  evento.setEstado(rs.getString(4));
-                  evento.setPais(rs.getString(5));
-                  evento.setDescricao(rs.getString(6));
-                  evento.setDatafim(rs.getString(7));
-                  evento.setDatainicio(rs.getString(8));
-                  evento.setEndereco(rs.getString(9));
-                  evento.setCount_entradas(rs.getInt(10));
+                  evento.        setIdevento(rs.getLong(1));
+                  evento.        setTitulo(rs.getString(2));
+                  evento.        setCidade(rs.getString(3));
+                  evento.        setEstado(rs.getString(4));
+                  evento.        setPais(  rs.getString(5));
+                  evento.     setDescricao(rs.getString(6));
+                  evento.       setDatafim(FormatarData(rs.getString(7)));
+                  evento.    setDatainicio(FormatarData(rs.getString(8)));
+                  evento.      setEndereco(rs.getString(9));
+                  evento.  setCount_entradas(rs.getInt(10));
                   evento.setPreco_entrada(rs.getDouble(11));
-                  evento.setAnfitriao(rs.getString(12));
+                  evento.    setAnfitriao(rs.getString(12));
                   eventos.add(evento);
               }
           }catch(Exception sqle){
@@ -181,16 +182,29 @@ public class EventoDAOImp  implements EventoDAO {
     }
 
     private String FormatarData(String date_s) throws ParseException{
+        String reformattedStr = "";
+        SimpleDateFormat fromDataBase = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat myFormat     = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        
+        
+        
 
+        try {
+            reformattedStr = myFormat.format(fromDataBase.parse(date_s));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        // *** note that it's "yyyy-MM-dd hh:mm:ss" not "yyyy-mm-dd hh:mm:ss"
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = dt.parse(date_s);
-
-        // *** same for the format String below
-        SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
-        return (dt1.format(date));
+//        if(reformattedStr.substring(11).equals("00:00")){
+//             
+//          
+//        }
+//         
+        
+ 
+        return reformattedStr;
     }
-
+    
+ 
 
 }

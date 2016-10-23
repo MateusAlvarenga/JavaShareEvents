@@ -25,7 +25,11 @@ public class Evento {
     @Transient private int participantes;
 
     @Override public String toString() {
-        return "Evento{" + "idevento=" + idevento + ", titulo=" + titulo + ", cidade=" + cidade + ", estado=" + estado + ", Pais=" + Pais + ", Descricao=" + Descricao + ", anfitriao=" + anfitriao + ", datafim=" + datafim + ", datainicio=" + datainicio + ", endereco=" + endereco + '}';
+        return "Evento{" + "idevento=" + idevento + ", titulo=" + titulo + 
+                ", cidade=" + cidade + ", estado=" + estado + ", Pais=" + Pais + 
+                ", Descricao=" + Descricao + ", anfitriao=" + anfitriao + 
+                ", datafim=" + datafim + ", datainicio=" + datainicio + ", endereco=" + endereco + 
+                ", preco_entrada=" + preco_entrada + ", count_entradas=" + count_entradas + '}';
     }
 
 

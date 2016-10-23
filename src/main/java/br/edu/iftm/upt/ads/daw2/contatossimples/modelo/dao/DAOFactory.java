@@ -1,5 +1,6 @@
 package br.edu.iftm.upt.ads.daw2.contatossimples.modelo.dao;
 
+import com.tadeventos.DAO.CompraDAOImp;
 import com.tadeventos.DAO.EventoDAO;
 import com.tadeventos.DAO.EventoDAOImp;
 import java.sql.Connection;
@@ -14,6 +15,14 @@ public class DAOFactory {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
             return new EventoDAOImp(conexao);
+        }
+    }
+    
+      public CompraDAOImp criarCompraDAO() {
+        if (conexao == null) {
+            throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
+        } else {
+            return new CompraDAOImp(conexao);
         }
     }
 
