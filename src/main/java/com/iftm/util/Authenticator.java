@@ -1,6 +1,7 @@
-package com.iftm.tadeventos.model;
+package com.iftm.util;
 
 import br.edu.iftm.upt.ads.daw2.contatossimples.modelo.dao.DAOFactory;
+import com.iftm.tadeventos.model.User;
 import com.tadeventos.DAO.UserDAO;
 import com.tadeventos.DAO.UserDAOImp;
 import java.sql.SQLException;
