@@ -1,9 +1,10 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="user_name" value="${requestScope['user'].username}"/>
 <%@include file="views/template/header.jsp" %>
+
 <script src="${contextPath}/resources/css/homepage.css"></script>
+
 <div class="ui vertical feature segment">
     <div class="ui centered page grid">
         <div class="fourteen wide column">
@@ -29,15 +30,15 @@
             </div>
         </div>
     </div>
+</div>
 
-    <%@include file="views/template/bottom.jsp" %>
+<%@include file="views/template/bottom.jsp" %>
 
-    <form id="logoutForm" method="POST" action="${contextPath}/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
+<form id="logoutForm" method="POST" action="${contextPath}/logout">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
 
-  
-    <script src="${contextPath}/resources/js/homepage.js"></script>
-    <script>
-        window.history.pushState('Object', 'Title', "${contextPath}" + '/');
-    </script>
+<script src="${contextPath}/resources/js/homepage.js"></script>
+<script>
+    window.history.pushState('Object', 'Title', "${contextPath}" + '/');
+</script>

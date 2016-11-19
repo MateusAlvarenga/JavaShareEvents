@@ -1,10 +1,9 @@
-package br.edu.iftm.upt.ads.daw2.contatossimples.modelo.dao;
+package br.edu.iftm.tadeventos.DAO;
 
- 
-import com.tadeventos.DAO.CarteiraDAOImp;
-import com.tadeventos.DAO.CompraDAOImp;
-import com.tadeventos.DAO.EventoDAOImp;
-import com.tadeventos.DAO.UserDAOImp;
+import br.edu.iftm.tadeventos.DAO.CarteiraDAO;
+import br.edu.iftm.tadeventos.DAO.CompraDAO;
+import br.edu.iftm.tadeventos.DAO.EventoDAO;
+import br.edu.iftm.tadeventos.DAO.UserDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -12,42 +11,42 @@ public class DAOFactory {
 
     private Connection conexao = null;
 
-    public EventoDAOImp criarEventoDAO() {
+    public EventoDAO criarEventoDAO() {
         if (conexao == null) {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
-            return new EventoDAOImp(conexao);
+            return new EventoDAO(conexao);
         }
     }
-    
-      public CompraDAOImp criarCompraDAO() {
+
+    public CompraDAO criarCompraDAO() {
         if (conexao == null) {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
-            return new CompraDAOImp(conexao);
+            return new CompraDAO(conexao);
         }
     }
-    
-   public UserDAOImp criarUserDAO() {
+
+    public UserDAO criarUserDAO() {
         if (conexao == null) {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
-            return new UserDAOImp(conexao);
+            return new UserDAO(conexao);
         }
     }
-   
-      public CarteiraDAOImp criarCarteiraDAO() {
+
+    public CarteiraDAO criarCarteiraDAO() {
         if (conexao == null) {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
-            return new CarteiraDAOImp(conexao);
+            return new CarteiraDAO(conexao);
         }
     }
 
     public void abrirConexao() throws SQLException {
         if (conexao == null) {
             conexao = ConexaoFactory.getConexao();
-            System.out.println("Conexão aberta."+conexao);
+            System.out.println("Conexão aberta." + conexao);
         } else {
             throw new IllegalStateException("A conexão já está aberta.");
         }

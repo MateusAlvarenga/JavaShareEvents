@@ -1,6 +1,6 @@
-package com.tadeventos.DAO;
+package br.edu.iftm.tadeventos.DAO;
 
-import com.iftm.tadeventos.model.Carteira;
+import br.edu.iftm.tadeventos.model.Carteira;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,15 +11,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CarteiraDAOImp implements CarteiraDAO {
+public class CarteiraDAO {
 
     private final Connection conexao;
 
-    public CarteiraDAOImp(Connection conexao) {
+    public CarteiraDAO(Connection conexao) {
         this.conexao = conexao;
     }
 
-    @Override
     public void AddCarteira(Carteira carteira) {
 
         String insercao = "INSERT INTO `carteira`(`proprietario`, `saldo`) VALUES ( ? , ? )";
@@ -36,11 +35,10 @@ public class CarteiraDAOImp implements CarteiraDAO {
                 System.out.println("A insersao nao foi feita corretamente.");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EventoDAOImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @Override
     public List Busca(String str) {
 
         Carteira carteira;
@@ -68,12 +66,12 @@ public class CarteiraDAOImp implements CarteiraDAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
         return carteiras;
-
     }
 
-    @Override
     public Carteira getCarteira(Long proprietario) {
+        
         Carteira carteira = null;
         String selecao = "SELECT `proprietario`, `saldo` FROM `carteira` WHERE `proprietario` = " + proprietario;
 
@@ -90,11 +88,12 @@ public class CarteiraDAOImp implements CarteiraDAO {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
         return carteira;
     }
 
-    @Override
     public void AtualizaSaldo(Carteira carteira) {
+        
         String insercao = "UPDATE `carteira` SET `saldo` =  ?  WHERE `proprietario` = ? ;";
         System.out.println(insercao);
         try (PreparedStatement pstmt = conexao.prepareStatement(insercao)) {
@@ -110,7 +109,7 @@ public class CarteiraDAOImp implements CarteiraDAO {
                 System.out.println("A Atualizacao nao foi feita corretamente.");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EventoDAOImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -5,25 +5,25 @@
         <description/>
         <display-name>LoginController</display-name>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>com.iftm.tadeventos.controllers.LoginController</servlet-class>
+        <servlet-class>br.edu.iftm.tadeventos.controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
         <description/>
         <display-name>EventosController</display-name>
         <servlet-name>EventosController</servlet-name>
-        <servlet-class>com.iftm.tadeventos.controllers.EventosController</servlet-class>
-    </servlet> 
+        <servlet-class>br.edu.iftm.tadeventos.controllers.EventosController</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>BuscaController</display-name>
         <servlet-name>BuscaController</servlet-name>
-        <servlet-class>com.iftm.tadeventos.controllers.BuscaController</servlet-class>
+        <servlet-class>br.edu.iftm.tadeventos.controllers.BuscaController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <description/>
         <display-name>RegistrationController</display-name>
         <servlet-name>RegistrationController</servlet-name>
-        <servlet-class>com.iftm.tadeventos.controllers.RegistrationController</servlet-class>
+        <servlet-class>br.edu.iftm.tadeventos.controllers.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -37,7 +37,7 @@
         <servlet-name>BuscaController</servlet-name>
         <url-pattern>/BuscaController</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/RegistrationController</url-pattern>
     </servlet-mapping>

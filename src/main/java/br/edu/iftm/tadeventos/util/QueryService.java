@@ -1,4 +1,4 @@
-package com.iftm.util;
+package br.edu.iftm.tadeventos.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,10 @@ public class QueryService {
     public void addString(String coluna, String valor) {
         addParam(coluna, "'" + valor + "'");
     }
-    
+
     public void addInt(String coluna, int valor) {
         addParam(coluna, String.valueOf(valor));
     }
-    
 
     private void addParam(String coluna, String Valor) {
         colunas.add(coluna);
@@ -41,6 +40,7 @@ public class QueryService {
             }
 
         }
+        
         return where;
     }
 

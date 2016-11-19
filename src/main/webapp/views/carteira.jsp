@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="user_name" value="${requestScope['user'].username}"/>
-<jsp:useBean id="random" class="com.iftm.util.RandomBean" scope="application" />
 <%@include file="template/header.jsp" %>
 
 <div style="margin-top: 60px;margin-left: 40px">

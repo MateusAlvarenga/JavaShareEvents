@@ -1,6 +1,6 @@
-package br.edu.iftm.upt.ads.daw2.contatossimples.modelo.dao;
+package br.edu.iftm.tadeventos.DAO;
 
-import com.iftm.util.Seed;
+import br.edu.iftm.tadeventos.util.Seed;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public class ConexaoFactory {
         String host = "localhost";
         String porta = "3306";
         String bd = "TADeventos";
-        String login = "mat";//mat
+        String login = "root"; //mat
         String senha = "123456";
         String url = caminho + "://" + host + ":" + porta + "/" + bd;
 
@@ -41,22 +41,23 @@ public class ConexaoFactory {
     private static Connection getConexaoH2() throws SQLException {
         String bd = "TADeventos";
         String url = "jdbc:h2:~/test" + bd;
-        String login = "sa";//mat
+        String login = "sa"; //mat
         String senha = "";
         boolean criarBD = false;
         Connection conexao = null;
 
         try {
-
             Class.forName("org.h2.Driver");
 
-            File arquivoBD = new File(System.getProperty("user.dir")
+            File arquivoBD = new File(System.getProperty("user.dir") 
                     + System.getProperty("file.separator") + bd + ".mv.db");
+            
             if (!arquivoBD.exists()) {  // O arquivo do BD ainda não existe. 
 
                 System.out.println("O arquivo do BD ainda não existe");
                 criarBD = true;
             }
+            
             System.out.println("flag 3");
             conexao = DriverManager.getConnection(url, login, senha);
 
@@ -68,10 +69,9 @@ public class ConexaoFactory {
                 seed.inserirDadosIniciais();
 
                 System.out.println("Banco de dados criado: " + bd + ".mv.db");
-
             }
+            
             System.out.println("Banco de dados utilizado: " + bd + ".mv.db");
-
         } catch (SQLException e) {
             System.out.println("Não foi possível estabelecer a conexão com o banco selecionado.");
         } catch (ClassNotFoundException ex) {
