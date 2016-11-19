@@ -1,8 +1,10 @@
 package br.edu.iftm.upt.ads.daw2.contatossimples.modelo.dao;
 
+ 
+import com.tadeventos.DAO.CarteiraDAOImp;
 import com.tadeventos.DAO.CompraDAOImp;
-import com.tadeventos.DAO.EventoDAO;
 import com.tadeventos.DAO.EventoDAOImp;
+import com.tadeventos.DAO.UserDAOImp;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -25,10 +27,27 @@ public class DAOFactory {
             return new CompraDAOImp(conexao);
         }
     }
+    
+   public UserDAOImp criarUserDAO() {
+        if (conexao == null) {
+            throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
+        } else {
+            return new UserDAOImp(conexao);
+        }
+    }
+   
+      public CarteiraDAOImp criarCarteiraDAO() {
+        if (conexao == null) {
+            throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
+        } else {
+            return new CarteiraDAOImp(conexao);
+        }
+    }
 
     public void abrirConexao() throws SQLException {
         if (conexao == null) {
             conexao = ConexaoFactory.getConexao();
+            System.out.println("Conexão aberta."+conexao);
         } else {
             throw new IllegalStateException("A conexão já está aberta.");
         }
