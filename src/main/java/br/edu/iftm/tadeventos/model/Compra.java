@@ -48,7 +48,7 @@ public class Compra {
         this.total = total;
     } 
 
-    public void addQuantidade(Evento evento) {
+    public void addQuantidade() {
         quantidade++;
         total = evento.getPrecoEntrada() * quantidade;
     }

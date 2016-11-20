@@ -110,7 +110,7 @@ public class BuscaController extends HttpServlet {
             compra.setTotal(evento.getPrecoEntrada());            
             compraDAO.add(compra);
         } else {
-            compra.addQuantidade(evento);
+            compra.addQuantidade();
             compraDAO.atualizar(compra);
         }
 
