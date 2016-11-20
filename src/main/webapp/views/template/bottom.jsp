@@ -13,10 +13,6 @@
 
 </body>
 
-<form id="logoutForm" method="GET" action="${contextPath}/LoginController">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-
 <script type="text/javascript">
     function SubmeterEBuscar() {
         var campo = "cidade";

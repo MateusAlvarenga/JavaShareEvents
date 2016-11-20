@@ -3,42 +3,49 @@
     <display-name>TadEventosS</display-name>
     <servlet>
         <description/>
-        <display-name>LoginController</display-name>
+        <display-name>login</display-name>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>br.edu.iftm.tadeventos.controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
         <description/>
-        <display-name>EventosController</display-name>
+        <display-name>eventos</display-name>
         <servlet-name>EventosController</servlet-name>
         <servlet-class>br.edu.iftm.tadeventos.controllers.EventosController</servlet-class>
     </servlet>
     <servlet>
         <description/>
-        <display-name>BuscaController</display-name>
+        <display-name>busca</display-name>
         <servlet-name>BuscaController</servlet-name>
         <servlet-class>br.edu.iftm.tadeventos.controllers.BuscaController</servlet-class>
     </servlet>
     <servlet>
         <description/>
-        <display-name>RegistrationController</display-name>
+        <display-name>cadastro</display-name>
         <servlet-name>RegistrationController</servlet-name>
         <servlet-class>br.edu.iftm.tadeventos.controllers.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
-        <url-pattern>/LoginController</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EventosController</servlet-name>
-        <url-pattern>/EventosController</url-pattern>
+        <url-pattern>/eventos/publicar</url-pattern>
+        <url-pattern>/eventos/editar</url-pattern>
+        <url-pattern>/eventos/remover</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BuscaController</servlet-name>
-        <url-pattern>/BuscaController</url-pattern>
+        <url-pattern>/busca</url-pattern>
+        <url-pattern>/busca/evento</url-pattern>
+        <url-pattern>/busca/detalhes</url-pattern>
+        <url-pattern>/busca/compra</url-pattern>
+        <url-pattern>/busca/minhas-compras</url-pattern>
+        <url-pattern>/busca/minhas-publicacoes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
-        <url-pattern>/RegistrationController</url-pattern>
+        <url-pattern>/cadastro</url-pattern>
     </servlet-mapping>
 </web-app>

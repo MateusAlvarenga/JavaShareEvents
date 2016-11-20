@@ -1,7 +1,6 @@
 package br.edu.iftm.tadeventos.controllers;
 
 import br.edu.iftm.tadeventos.DAO.DAOFactory;
-import br.edu.iftm.tadeventos.model.Carteira;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import br.edu.iftm.tadeventos.model.User;
-import br.edu.iftm.tadeventos.DAO.CarteiraDAO;
 import br.edu.iftm.tadeventos.DAO.UserDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -24,6 +22,7 @@ public class RegistrationController extends HttpServlet {
         super();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             RequestDispatcher rd = null;
@@ -36,19 +35,13 @@ public class RegistrationController extends HttpServlet {
             daof.abrirConexao();
             UserDAO userDao = daof.criarUserDAO();
 
-            if (userDao.GetUser(username) == null && password.equals(pass_confirm)) {
+            if (userDao.buscar(username) == null && password.equals(pass_confirm)) {
                 User user = new User(username, password);
                 StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
                 String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
                 user.setPassword(encryptedPassword);
-                userDao.AddUser(user);
-                user = userDao.GetUser(username);
-
-                Carteira carteira = new Carteira();
-                carteira.setProprietario(user.getId().intValue());
-                carteira.setSaldo(0.00);
-                CarteiraDAO cd = daof.criarCarteiraDAO();
-                cd.AddCarteira(carteira);
+                userDao.add(user);
+                user = userDao.buscar(username);
 
                 request.getSession().setAttribute("username", user.getUsername());
                 request.setAttribute("username", user);
@@ -64,8 +57,7 @@ public class RegistrationController extends HttpServlet {
 
     public void redirect(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
-            RequestDispatcher rd = null;
-            rd = request.getRequestDispatcher(path);
+            RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(EventosController.class.getName()).log(Level.SEVERE, null, ex);

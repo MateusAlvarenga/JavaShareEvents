@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
         session.invalidate();
-        redirect(request, response, "/index.jsp");
+        redirect(request, response, "/");
     }
 
     public void redirect(HttpServletRequest request, HttpServletResponse response, String path) {

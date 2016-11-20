@@ -16,16 +16,17 @@ public class UserDAO {
         this.conexao = conexao;
     }
 
-    public void AddUser(User user) {
-        
+    public void add(User user) {
         String insercao = "INSERT INTO `TADeventos`.`user` (`username`,`password`) " + "VALUES( ? , ? )";
-        
+
         try (PreparedStatement pstmt = conexao.prepareStatement(insercao)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
 
             System.out.println(pstmt.toString());
+            
             int resultado = pstmt.executeUpdate();
+            
             if (resultado == 1) {
                 System.out.println("\nInsersao bem sucedida.");
             } else {
@@ -36,27 +37,17 @@ public class UserDAO {
         }
     }
 
-    public User GetUser(String username) {
-        return GetUserGenerico("username", username);
-    }
-    
-    public User GetUser(Long userId) {
-        return GetUserGenerico("id", userId.toString());
-    }
-
-    private User GetUserGenerico(String campo, String valor) {
-        
+    public User buscar(String username) {
         User user = null;
-        String selecao = "SELECT * FROM TADeventos.user WHERE " + campo +  " = '" + valor + "' Limit 1";
-        System.out.println(selecao);
-        
+        String selecao = "SELECT * FROM TADeventos.user WHERE username = ? LIMIT 1";
+
         try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
- 
+            pstmt.setString(1, username);
+            System.out.println(selecao);
+
             try (ResultSet rs = pstmt.executeQuery()) {
-
                 if (rs.next()) {
-                    user = new User(rs.getLong(1), rs.getString(2), rs.getString(3));
-
+                    user = new User(rs.getLong("id"), rs.getString("username"), rs.getString("password"));
                 }
             } catch (SQLException sqle) {
                 System.out.println(sqle);
@@ -64,7 +55,29 @@ public class UserDAO {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
+        return user;
+    }
+
+    public User buscar(Long id) {
+        User user = null;
+        String selecao = "SELECT * FROM TADeventos.user WHERE id = ? LIMIT 1";
+
+        try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
+            pstmt.setLong(1, id);
+            System.out.println(selecao);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    user = new User(rs.getLong("id"), rs.getString("username"), rs.getString("password"));
+                }
+            } catch (SQLException sqle) {
+                System.out.println(sqle);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
         return user;
     }
 

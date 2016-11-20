@@ -12,30 +12,31 @@
 
 <div class="container" style="margin-left: 30px">
     <div class="ui cards" style="margin-left: 0; margin-right: 0">
-        <c:forEach items="${filteredEventList}" var="evento">
+        <c:forEach items="${eventos}" var="evento">
             <div class="ui card ">
                 <div class="card">
                     <div class="content" style="padding: 15px">
                         <div class="header">
-                            <c:out value="${evento.titulo}" />
+                            <p><c:out value="${evento.titulo}" /></p>
                         </div>
                         <div class="meta">
-                            <a>  <c:out value="by ${evento.anfitriao}" /></a>
+                            <a>  <p><c:out value="por ${evento.anfitriao.username}" /></p></a>
                         </div>
                         <div class="description content">
                             <span class="right ">
-                                <c:out value="${evento.endereco}" />
+                                <p><c:out value="${evento.endereco}" /></p>
                             </span>
                         </div>
                     </div>
-                    <div class="extra content" style="padding: 15px">
-                        <p class="">
-                            <c:out value="${evento.datainicio} - ${evento.datafim}" />
-                        </p>
+                    <div class="extra content" style="padding: 0 15px 15px;">
+                        <p><c:out value="${evento.dataInicio} - ${evento.dataFim}" /></p>
+                        <hr>
+                        <p><a href="${contextPath}/eventos/editar?idevento=${evento.id}">Editar</a></p>
+                        <p><a href="${contextPath}/eventos/remover?idevento=${evento.id}">Remover</a></p>
                     </div>
                 </div>
 
-                <a href="${contextPath}/BuscaController?action=detalhes&idevento=${evento.idevento}" >
+                <a href="${contextPath}/busca/detalhes?idevento=${evento.id}" >
                     <div class="ui link bottom attached button primary">
                         Ver
                     </div>
@@ -44,7 +45,5 @@
         </c:forEach>
     </div>
 </div>
-
-<script src="${contextPath}/resources/js/publicarEvento.js"></script>
 
 <%@include file="/views/template/bottom.jsp" %>

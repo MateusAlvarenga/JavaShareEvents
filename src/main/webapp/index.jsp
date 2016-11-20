@@ -10,16 +10,7 @@
         <div class="fourteen wide column">
             <div class="ui transition  ">
 
-                <div class="ui centered lead header">Encontre aqui os melhores eventos!
-                    <c:if test="${user_name} == null">
-                        <span >
-                            <a  href="#" class=" basic inverted animated fade ui button tblack">
-                                <div class="visible content tblack">Come to TADeventos</div>
-                                <div class="hidden content tblack" onclick="window.location.href = '/registration'"  >Criar uma nova conta</div>
-                            </a>
-                        </span>
-                    </c:if>
-                </div>
+                <div class="ui centered lead header">Encontre aqui os melhores eventos!</div>
 
                 <div class="ui centerted circular image">
                     <video id="banner_video" loop controls preload="auto">
@@ -34,11 +25,4 @@
 
 <%@include file="views/template/bottom.jsp" %>
 
-<form id="logoutForm" method="POST" action="${contextPath}/logout">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-
 <script src="${contextPath}/resources/js/homepage.js"></script>
-<script>
-    window.history.pushState('Object', 'Title', "${contextPath}" + '/');
-</script>

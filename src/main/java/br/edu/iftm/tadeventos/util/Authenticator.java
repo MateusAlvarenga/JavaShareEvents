@@ -21,7 +21,7 @@ public class Authenticator {
             DAOFactory factory = new DAOFactory();
             factory.abrirConexao();
             UserDAO userdao = factory.criarUserDAO();
-            User user = userdao.GetUser(username);
+            User user = userdao.buscar(username);
             factory.fecharConexao();
             StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
             

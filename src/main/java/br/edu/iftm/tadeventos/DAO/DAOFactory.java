@@ -1,9 +1,5 @@
 package br.edu.iftm.tadeventos.DAO;
 
-import br.edu.iftm.tadeventos.DAO.CarteiraDAO;
-import br.edu.iftm.tadeventos.DAO.CompraDAO;
-import br.edu.iftm.tadeventos.DAO.EventoDAO;
-import br.edu.iftm.tadeventos.DAO.UserDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -32,14 +28,6 @@ public class DAOFactory {
             throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
         } else {
             return new UserDAO(conexao);
-        }
-    }
-
-    public CarteiraDAO criarCarteiraDAO() {
-        if (conexao == null) {
-            throw new IllegalStateException("Abra uma conexão antes de criar um DAO.");
-        } else {
-            return new CarteiraDAO(conexao);
         }
     }
 

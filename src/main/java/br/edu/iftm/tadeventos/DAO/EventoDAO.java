@@ -7,56 +7,55 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class EventoDAO {
 
     private final Connection conexao;
+    private final UserDAO userDAO;
 
     public EventoDAO(Connection conexao) {
         this.conexao = conexao;
+        userDAO = new UserDAO(conexao);
     }
 
-    public void AddEvento(Evento evento) {
-
-        String insercao = "INSERT INTO `TADeventos`.`evento` (`titulo`,`cidade`,`estado`,`Pais`,\n"
-                + "`Descricao`,`anfitriao`,`datafim`,`datainicio`,`endereco`,`preco_entrada`,`count_entradas`)\n"
-                + "VALUES( ? , ? , ? , ? , ?, ? , ? , ? , ?, ? , ? )";
+    public void add(Evento evento) {
+        String insercao = "INSERT INTO `TADeventos`.`evento` "
+                + "(`titulo`,`descricao`,`id_user`,`datafim`,`datainicio`,`endereco`,`preco_entrada`,`participantes`) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        
         try (PreparedStatement pstmt = conexao.prepareStatement(insercao)) {
             pstmt.setString(1, evento.getTitulo());
-            pstmt.setString(2, evento.getCidade());
-            pstmt.setString(3, evento.getEstado());
-            pstmt.setString(4, evento.getPais());
-            pstmt.setString(5, evento.getDescricao());
-            pstmt.setString(6, evento.getAnfitriao());
-            pstmt.setString(7, evento.getDatafim());
-            pstmt.setString(8, evento.getDatainicio());
-            pstmt.setString(9, evento.getEndereco());
-            pstmt.setDouble(10, evento.getPreco_entrada());
-            pstmt.setInt(11, evento.getCount_entradas());
+            pstmt.setString(2, evento.getDescricao());
+            pstmt.setLong(3, evento.getAnfitriao().getId());
+            pstmt.setString(4, evento.getDataFim());
+            pstmt.setString(5, evento.getDataInicio());
+            pstmt.setString(6, evento.getEndereco());
+            pstmt.setDouble(7, evento.getPrecoEntrada());
+            pstmt.setInt(8, evento.getParticipantes());
+            
             System.out.println(pstmt.toString());
+            
             int resultado = pstmt.executeUpdate();
+            
             if (resultado == 1) {
                 System.out.println("\nInsersao bem sucedida.");
             } else {
                 System.out.println("A insersao nao foi feita corretamente.");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }
 
-    public void DeleteEvento(Long idevento) {
-
-        String remocoes = "DELETE FROM `TADeventos`.`evento` WHERE `idevento` = " + idevento + ";";
+    public void remover(Evento evento) {
+        String remocoes = "DELETE FROM `TADeventos`.`evento` WHERE `id` = ?;";
+        
         try (PreparedStatement pstmt = conexao.prepareStatement(remocoes)) {
-            pstmt.setLong(1, idevento);
+            pstmt.setLong(1, evento.getId());            
             int removeu = pstmt.executeUpdate();
+            
             if (removeu == 1) {
                 System.out.println("Remoção efetuada com sucesso.");
             } else {
@@ -64,31 +63,28 @@ public class EventoDAO {
             }
         } catch (SQLException sqle) {
             System.out.println(sqle);
-
         }
     }
 
-    public void EditEvento(Evento evento) {
-
+    public void atualizar(Evento evento) {
         String alteracao = "UPDATE `TADeventos`.`evento`"
-                + "SET `titulo` = ?,`cidade` = ? ,`estado` = ?,`Pais` = ? ,Descricao` = ?,"
-                + "`anfitriao` = ? ,`datafim` = ?,`datainicio` = ?,`endereco` = ?,"
-                + "`preco_entrada` = ?,`count_entradas` = ? WHERE `idevento` = ?;";
+                + "SET `titulo` = ?, `descricao` = ?,"
+                + "`id_user` = ? ,`datafim` = ?,`datainicio` = ?,`endereco` = ?,"
+                + "`preco_entrada` = ?,`participantes` = ? WHERE `id` = ?;";
         
         try (PreparedStatement pstmt = conexao.prepareStatement(alteracao)) {
             pstmt.setString(1, evento.getTitulo());
-            pstmt.setString(2, evento.getCidade());
-            pstmt.setString(3, evento.getEstado());
-            pstmt.setString(4, evento.getPais());
-            pstmt.setString(5, evento.getDescricao());
-            pstmt.setString(6, evento.getAnfitriao());
-            pstmt.setString(7, evento.getDatafim());
-            pstmt.setString(8, evento.getDatainicio());
-            pstmt.setString(9, evento.getEndereco());
-            pstmt.setDouble(10, evento.getPreco_entrada());
-            pstmt.setInt(11, evento.getCount_entradas());
-            pstmt.setLong(12, evento.getIdevento());
+            pstmt.setString(2, evento.getDescricao());
+            pstmt.setLong(3, evento.getAnfitriao().getId());
+            pstmt.setString(4, evento.getDataFim());
+            pstmt.setString(5, evento.getDataInicio());
+            pstmt.setString(6, evento.getEndereco());
+            pstmt.setDouble(7, evento.getPrecoEntrada());
+            pstmt.setInt(8, evento.getParticipantes());
+            pstmt.setLong(9, evento.getId());
+            
             int alteracoes = pstmt.executeUpdate();
+            
             if (alteracoes == 1) {
                 System.out.println("\nAlteracao bem sucedida.");
             } else {
@@ -96,131 +92,130 @@ public class EventoDAO {
             }
         } catch (SQLException sqle) {
             System.out.println(sqle);
-
         }
     }
 
-    public Evento GetEvento(Long idevento) {
-
+    public Evento buscar(Long id) {
         Evento evento = null;
-        String selecao = "SELECT * FROM evento WHERE idevento = ?";
+        String selecao = "SELECT * FROM evento WHERE id = ?";
+        
         try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
-            pstmt.setLong(1, idevento);
+            pstmt.setLong(1, id);
+            
             try (ResultSet rs = pstmt.executeQuery()) {
-
                 if (rs.next()) {
                     evento = new Evento();
-                    evento.setIdevento(rs.getLong(1));
-                    evento.setTitulo(rs.getString(2));
-                    evento.setCidade(rs.getString(3));
-                    evento.setEstado(rs.getString(4));
-                    evento.setPais(rs.getString(5));
-                    evento.setDescricao(rs.getString(6));
-                    evento.setDatafim(rs.getString(7));
-                    evento.setDatainicio(rs.getString(8));
-                    evento.setEndereco(rs.getString(9));
-                    evento.setCount_entradas(rs.getInt(10));
-                    evento.setPreco_entrada(rs.getDouble(11));
-                    evento.setAnfitriao(rs.getString(12));
+                    evento.setId(rs.getLong("id"));
+                    evento.setTitulo(rs.getString("titulo"));
+                    evento.setDescricao(rs.getString("descricao"));
+                    evento.setDataFim(rs.getString("datafim"));
+                    evento.setDataInicio(rs.getString("datainicio"));
+                    evento.setEndereco(rs.getString("endereco"));
+                    evento.setParticipantes(rs.getInt("participantes"));
+                    evento.setPrecoEntrada(rs.getDouble("preco_entrada"));
+                    evento.setAnfitriao(userDAO.buscar(rs.getLong("id_user")));
                 }
             } catch (SQLException sqle) {
                 System.out.println(sqle);
-
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
         return evento;
-
     }
 
-    public List GetAllEventos() {
-        return Busca("");
-    }
-
-    public List Busca(String str) {
-
+    public List buscarTodos() {
         Evento evento;
         List<Evento> eventos = new ArrayList<>();
-        String selecao = "SELECT * FROM evento " + str + ";";
+        String selecao = "SELECT * FROM evento;";
 
         try (Statement stmt = (Statement) conexao.createStatement()) {
             try (ResultSet rs = stmt.executeQuery(selecao)) {
-
                 while (rs.next()) {
                     evento = new Evento();
-                    evento.setIdevento(rs.getLong(1));
-                    evento.setTitulo(rs.getString(2));
-                    evento.setCidade(rs.getString(3));
-                    evento.setEstado(rs.getString(4));
-                    evento.setPais(rs.getString(5));
-                    evento.setDescricao(rs.getString(6));
-                    evento.setDatafim(FormatarData(rs.getString(7)));
-                    evento.setDatainicio(FormatarData(rs.getString(8)));
-                    evento.setEndereco(rs.getString(9));
-                    evento.setCount_entradas(rs.getInt(10));
-                    evento.setPreco_entrada(rs.getDouble(11));
-                    evento.setAnfitriao(rs.getString(12));
+                    evento.setId(rs.getLong("id"));
+                    evento.setTitulo(rs.getString("titulo"));
+                    evento.setDescricao(rs.getString("descricao"));
+                    evento.setDataFim(rs.getString("datafim"));
+                    evento.setDataInicio(rs.getString("datainicio"));
+                    evento.setEndereco(rs.getString("endereco"));
+                    evento.setParticipantes(rs.getInt("participantes"));
+                    evento.setPrecoEntrada(rs.getDouble("preco_entrada"));
+                    evento.setAnfitriao(userDAO.buscar(rs.getLong("id_user")));
                     eventos.add(evento);
                 }
             } catch (Exception sqle) {
                 System.out.println(sqle);
-
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println(e);
         }
+        
         return eventos;
+    }   
 
-    }
+    public List buscarTodos(String endereco) {
+        Evento evento;
+        List<Evento> eventos = new ArrayList<>();
+        String selecao = "SELECT * FROM evento WHERE endereco LIKE ?;";
 
-    private String FormatarData(String date_s) throws ParseException {
-        String reformattedStr = "";
-        SimpleDateFormat fromDataBase = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-        try {
-            reformattedStr = myFormat.format(fromDataBase.parse(date_s));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-//        if(reformattedStr.substring(11).equals("00:00")){
-//             
-//          
-//        }
-         
-        return reformattedStr;
-    }
-
-    public List<User> getPresentes(String evento) throws SQLException {
-        
-        System.out.println("[evento]:"+evento+'\n');
-        List<User> users = new ArrayList();
-        String selecao = "SELECT user_id FROM TADeventos.user_has_evento\n"
-                + "where evento_idevento = "  +evento+  "\n"
-                + " group by user_id;";
-        
-        System.out.println("[selecao]:"+selecao+'\n');
-        DAOFactory df = new DAOFactory();
-        df.abrirConexao();
-        try (Statement stmt = (Statement) conexao.createStatement()) {
-            try (ResultSet rs = stmt.executeQuery(selecao)) {
-                User user;
-                
-                UserDAO ud = df.criarUserDAO();
+        try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
+            pstmt.setString(1, "%" + endereco + "%");
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    long id = Long.valueOf(rs.getString(1));
-                    user = ud.GetUser(id);
-                    users.add(user);
-                     System.out.println("[user]:"+user+'\n');
+                    evento = new Evento();
+                    evento.setId(rs.getLong("id"));
+                    evento.setTitulo(rs.getString("titulo"));
+                    evento.setDescricao(rs.getString("descricao"));
+                    evento.setDataFim(rs.getString("datafim"));
+                    evento.setDataInicio(rs.getString("datainicio"));
+                    evento.setEndereco(rs.getString("endereco"));
+                    evento.setParticipantes(rs.getInt("participantes"));
+                    evento.setPrecoEntrada(rs.getDouble("preco_entrada"));
+                    evento.setAnfitriao(userDAO.buscar(rs.getLong("id_user")));
+                    eventos.add(evento);
                 }
-
+            } catch (Exception sqle) {
+                System.out.println(sqle);
             }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         
-        System.out.println(users);
-        return users;
+        return eventos;
+    } 
+
+    public List buscarTodos(User user) {
+        Evento evento;
+        List<Evento> eventos = new ArrayList<>();
+        String selecao = "SELECT * FROM evento WHERE id_user = ?;";
+
+        try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
+            pstmt.setLong(1, user.getId());
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    evento = new Evento();
+                    evento.setId(rs.getLong("id"));
+                    evento.setTitulo(rs.getString("titulo"));
+                    evento.setDescricao(rs.getString("descricao"));
+                    evento.setDataFim(rs.getString("datafim"));
+                    evento.setDataInicio(rs.getString("datainicio"));
+                    evento.setEndereco(rs.getString("endereco"));
+                    evento.setParticipantes(rs.getInt("participantes"));
+                    evento.setPrecoEntrada(rs.getDouble("preco_entrada"));
+                    evento.setAnfitriao(userDAO.buscar(rs.getLong("id_user")));
+                    eventos.add(evento);
+                }
+            } catch (Exception sqle) {
+                System.out.println(sqle);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        return eventos;
     }
 }

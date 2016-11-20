@@ -1,20 +1,13 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="user_name" value="${requestScope['user'].username}"/>
- 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<%--
-<c:url var="GravarEvento" value="${contextPath}/GravarEvento" > </c:url>
 
---%>
-    <script>
-        window.history.pushState('Object', 'Title', "${contextPath}" + '/BuscaController?action=compra');  
-    </script>
 <%@include file="template/header.jsp" %>
+
 <br><br><br><br>
+
 <div class="container" style="margin-left: 30px; margin-right: 50px">
     <form class="ui form" method="GET" action="${contextPath}/BuscaController?action=efetivar_compra" ><%-- action="${contextPath}/EfetivarCompra" --%>
         <input type="hidden" name="action" value="efetivar_compra" />
@@ -27,7 +20,7 @@
             </div>
             <div class="field">
                 <span>R$</span>
-                <span id="valor-total" >0,00 </span>
+                <span id="valor-total">0,00</span>
             </div>
         </div>
         <div class="fields two" hidden="">
@@ -61,8 +54,8 @@
                     <input type="text" name="expiration" id="expiration" class="expiration"  placeholder="Expiration"  />                    
                 </div>
             </div>
-
         </div>
+        
         <button type="submit" class="positive ui button">Comprar</button>
         <button type="button" class="cancel ui button"><a href="${contextPath}/">Cancelar</button>
     </form>
@@ -71,5 +64,5 @@
 <script src="${contextPath}/resources/js/jquery.maskedinput.min.js"></script>
 <script src="${contextPath}/resources/js/jspdf.js"></script>
 <script src="${contextPath}/resources/js/compra.js"></script>
-<span> <c:out value="${ObjEvento}" /></span>
+
 <%@include file="template/bottom.jsp" %>
