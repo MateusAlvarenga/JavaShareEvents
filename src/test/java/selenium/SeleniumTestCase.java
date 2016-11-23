@@ -1,9 +1,9 @@
-package Selenium;
+package selenium;
 
-import br.edu.iftm.tadeventos.util.RandomBean;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
-import org.testng.annotations.*;
+import org.junit.Test;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,11 +17,11 @@ public class SeleniumTestCase {
         this.driver = new ChromeDriver();
         this.baseUrl = "http://localhost:8081";
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        randoindice = RandomBean.getNextInt(3000) + "";
+        randoindice = "433";
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void Cadastro() throws Exception {
         driver.get(baseUrl + "/TadEventosS/views/cadastro.jsp");
         driver.findElement(By.name("username")).clear();
@@ -36,7 +36,7 @@ public class SeleniumTestCase {
         driver.findElement(By.linkText("Logout")).click();
     }
 
-    @Test(priority = 2)
+    @Test
     public void Login() {
         driver.get(baseUrl + "/TadEventosS/views/login.jsp");
         driver.findElement(By.name("username")).clear();
@@ -49,7 +49,7 @@ public class SeleniumTestCase {
         Assert.assertEquals(Boolean.TRUE, check);
     }
 
-    @Test(priority = 3)
+    @Test
     public void publicar() {
         driver.get(baseUrl + "/TadEventosS/eventos/publicar");
         driver.findElement(By.id("titulo")).clear();
