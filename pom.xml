@@ -91,6 +91,12 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.19.1</version>
+            <scope>test</scope>  
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
@@ -122,7 +128,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <skipTests>${skipITs}</skipTests>
+                    <skipTests>true</skipTests>
                 </configuration>
                 <executions>
                     <execution>
@@ -216,7 +222,26 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>            
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.6.201602180812</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>    
         </plugins>
     </build>
 

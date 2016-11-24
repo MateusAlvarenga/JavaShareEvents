@@ -28,9 +28,9 @@ public class UserDAO {
             int resultado = pstmt.executeUpdate();
             
             if (resultado == 1) {
-                System.out.println("\nInsersao bem sucedida.");
+                System.out.println("\nInserção bem sucedida.");
             } else {
-                System.out.println("A insersao nao foi feita corretamente.");
+                System.out.println("A Inserção nao foi feita corretamente.");
             }
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);

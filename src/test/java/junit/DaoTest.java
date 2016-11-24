@@ -8,7 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import br.edu.iftm.tadeventos.DAO.*;
 import br.edu.iftm.tadeventos.model.*;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import org.testng.annotations.*;
 
@@ -20,6 +22,7 @@ public class DaoTest {
     private User user;
     private Evento evento;
     private Compra compra;
+    String nomeuserTeste = "rose";
 
     public DaoTest() throws SQLException {
         DAOFactory df = new DAOFactory();
@@ -29,14 +32,24 @@ public class DaoTest {
         compraDao = df.criarCompraDAO();
     }
 
+    @BeforeClass
+    public static void setup() throws SQLException {
+        DAOFactory factory = new DAOFactory();
+        factory.abrirConexao();
+        Connection conexao = ConexaoFactory.getConexao();
+
+        String remocao = "DELETE FROM `tadeventos`.`user` WHERE username = 'rose'";
+
+        Statement stmt = (Statement) conexao.createStatement();
+        stmt.executeUpdate(remocao);
+    }
+
     @Test
     public void test() {
-        String nomeuserTeste = "rose";
-
         user = new User(nomeuserTeste, "123456");
         userDao.add(user);
         user = userDao.buscar(nomeuserTeste);
-        assertNotEquals( null , nomeuserTeste);
+        assertNotEquals(null, nomeuserTeste);
 
         evento = new Evento(user, "EventoDAOTest", "EventoDAOTest", "EventoDAOTest", "EventoDAOTest", "Uberaba", 100.0, 100);
         eventoDao.add(evento);
@@ -51,5 +64,5 @@ public class DaoTest {
         assertNotEquals(null, compraDao.buscar(user, evento));
 
     }
- 
+
 }
