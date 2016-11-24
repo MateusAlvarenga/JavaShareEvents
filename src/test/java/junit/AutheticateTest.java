@@ -26,7 +26,7 @@ public class AutheticateTest {
     
     @Test
     public void Test_CorrectUser(){
-        String login_teste = "admin3";
+        String login_teste = "admin";
         String pass_teste = "123456";      
         
         Authenticator authenticator = new Authenticator();

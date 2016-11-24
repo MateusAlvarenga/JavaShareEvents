@@ -8,6 +8,16 @@ public class Compra {
     private int quantidade;
     private Double total;
 
+    public Compra() {
+    }
+
+    public Compra(Evento evento, User user, int i, double d) {
+       
+        this.evento = evento;
+        this.user = user;
+        this.quantidade = quantidade;
+        this.total = total; }
+    
     public Long getId() {
         return id;
     }

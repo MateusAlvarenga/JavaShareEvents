@@ -17,7 +17,7 @@ public class SeleniumTestCase {
         this.driver = new ChromeDriver();
         this.baseUrl = "http://localhost:8081";
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        randoindice = "433";
+        randoindice = "";
 
     }
 

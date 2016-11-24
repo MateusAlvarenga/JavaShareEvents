@@ -20,8 +20,8 @@ public class ConexaoFactory {
         String caminho = "jdbc:mysql";
         String host = "localhost";
         String porta = "3306";
-        String bd = "TADeventos";
-        String login = "root"; //mat
+        String bd = "tadeventos";
+        String login = "mat"; //mat
         String senha = "123456";
         String url = caminho + "://" + host + ":" + porta + "/" + bd;
 

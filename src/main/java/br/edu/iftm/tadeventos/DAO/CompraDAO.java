@@ -26,7 +26,7 @@ public class CompraDAO {
     }
 
     public void add(Compra compra) {
-        String insercao = "INSERT INTO `TADeventos`.`compra` "
+        String insercao = "INSERT INTO `tadeventos`.`compra` "
                 + "(`id_evento`, `id_user` , `total`, `quantidade`) \n"
                 + "VALUES(?, ?, ?, ?)";
 
@@ -141,7 +141,7 @@ public class CompraDAO {
     }
 
     public void atualizar(Compra compra) {
-        String alteracao = "UPDATE `TADeventos`.`compra` "
+        String alteracao = "UPDATE `tad`.`compra` "
                 + "SET `id_evento` = ?, `id_user` = ?, `total` = ?, `quantidade` = ? "
                 + "WHERE `id` = ?;";
         

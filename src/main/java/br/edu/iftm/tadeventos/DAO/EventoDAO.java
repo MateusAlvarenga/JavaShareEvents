@@ -21,7 +21,7 @@ public class EventoDAO {
     }
 
     public void add(Evento evento) {
-        String insercao = "INSERT INTO `TADeventos`.`evento` "
+        String insercao = "INSERT INTO `tadeventos`.`evento` "
                 + "(`titulo`,`descricao`,`id_user`,`datafim`,`datainicio`,`endereco`,`preco_entrada`,`participantes`) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
@@ -50,7 +50,7 @@ public class EventoDAO {
     }
 
     public void remover(Evento evento) {
-        String remocoes = "DELETE FROM `TADeventos`.`evento` WHERE `id` = ?;";
+        String remocoes = "DELETE FROM `tadeventos`.`evento` WHERE `id` = ?;";
         
         try (PreparedStatement pstmt = conexao.prepareStatement(remocoes)) {
             pstmt.setLong(1, evento.getId());            
@@ -67,7 +67,7 @@ public class EventoDAO {
     }
 
     public void atualizar(Evento evento) {
-        String alteracao = "UPDATE `TADeventos`.`evento`"
+        String alteracao = "UPDATE `tadeventos`.`evento`"
                 + "SET `titulo` = ?, `descricao` = ?,"
                 + "`id_user` = ? ,`datafim` = ?,`datainicio` = ?,`endereco` = ?,"
                 + "`preco_entrada` = ?,`participantes` = ? WHERE `id` = ?;";

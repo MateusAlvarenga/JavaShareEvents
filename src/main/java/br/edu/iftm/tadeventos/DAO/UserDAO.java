@@ -17,7 +17,7 @@ public class UserDAO {
     }
 
     public void add(User user) {
-        String insercao = "INSERT INTO `TADeventos`.`user` (`username`,`password`) " + "VALUES( ? , ? )";
+        String insercao = "INSERT INTO `tadeventos`.`user` (`username`,`password`) " + "VALUES( ? , ? )";
 
         try (PreparedStatement pstmt = conexao.prepareStatement(insercao)) {
             pstmt.setString(1, user.getUsername());
@@ -39,7 +39,7 @@ public class UserDAO {
 
     public User buscar(String username) {
         User user = null;
-        String selecao = "SELECT * FROM TADeventos.user WHERE username = ? LIMIT 1";
+        String selecao = "SELECT * FROM tadeventos.user WHERE username = ? LIMIT 1";
 
         try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
             pstmt.setString(1, username);
@@ -61,7 +61,7 @@ public class UserDAO {
 
     public User buscar(Long id) {
         User user = null;
-        String selecao = "SELECT * FROM TADeventos.user WHERE id = ? LIMIT 1";
+        String selecao = "SELECT * FROM tadeventos.user WHERE id = ? LIMIT 1";
 
         try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
             pstmt.setLong(1, id);

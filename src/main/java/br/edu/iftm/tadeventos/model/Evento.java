@@ -11,6 +11,27 @@ public class Evento {
     private String endereco;
     private Double precoEntrada;
     private int participantes;
+    
+    public Evento(){
+        
+    }
+
+ 
+
+    public Evento(User anfitriao, String titulo, String descricao, String dataFim, String dataInicio, String endereco, Double precoEntrada, int participantes) {
+     
+        this.anfitriao = anfitriao;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.dataFim = dataFim;
+        this.dataInicio = dataInicio;
+        this.endereco = endereco;
+        this.precoEntrada = precoEntrada;
+        this.participantes = participantes;
+        
+    }
+
+ 
 
     @Override
     public String toString() {
