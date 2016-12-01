@@ -2,7 +2,7 @@
 
 ## Getting Started 
 
-### (Instruções para executar o projeto)
+### Instruções para executar o projeto
 
 Crie o banco de dados com o modelo do MySQL Workbench `Modelo Banco TADeventos.mwb` ou use o script SQL `Banco de dados.sql` localizado na raíz do respositório.
 
